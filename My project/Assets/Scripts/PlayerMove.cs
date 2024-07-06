@@ -2,13 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Scripting.APIUpdating;
+using UnityEngine.UI;
+using System;
+using UnityEngine.Events;
 
 public class NewBehaviourScript : MonoBehaviour
 {
     [Header("플레이어 이동,점프")]
     [SerializeField] float MoveSpeed;
     [SerializeField] float JumpForce;
-    Vector3 movedir;
+    Vector3 movedir;// 0 0 0
+    Rigidbody2D rigid;//null
+    Animator anim;
+    float vertivalVelocity = 0f;
 
     [Header("플레이어 IsGround")]
     [SerializeField] bool isGround;
@@ -16,8 +22,11 @@ public class NewBehaviourScript : MonoBehaviour
     [SerializeField] float GroundLengthCheck;
     [SerializeField] Color GroundLengthColor;
 
-    float vertivalVelocity = 0f;
-
+    private void Awake()
+    {
+        rigid = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
+    }
 
     void Start()
     {
@@ -30,6 +39,7 @@ public class NewBehaviourScript : MonoBehaviour
         checkGround();
         MoveFunction();
 
+        doAnim();
     }
 
     private void OnDrawGizmos()
@@ -38,7 +48,7 @@ public class NewBehaviourScript : MonoBehaviour
         {
             Vector2 curPos = transform.position;
             Debug.DrawLine(transform.position, curPos - new Vector2(0, GroundLengthCheck), GroundLengthColor);
-                         //      시작         /                       끝                    /       색         /
+                                  //      시작         /                          끝                                  /       색         /
         }
     }
 
@@ -63,7 +73,16 @@ public class NewBehaviourScript : MonoBehaviour
 
     private void MoveFunction()
     {
-        
+        movedir.x = Input.GetAxisRaw("Horizontal") * MoveSpeed;
+        rigid.velocity = movedir;
+        movedir.y = rigid.velocity.y;
+        //좌우로 움직임 구현 A,D,방향키 누르면 1의 값을 넣음 아무것도 안누르면 0 컴퓨터한테 시키는 거임
+        //물리에 의해 이동함
+        //y 0, time.deltaTime;
     }
-
+    private void doAnim()
+    {
+        anim.SetInteger("Horizontal", (int)movedir.x);
+        anim.SetBool("IsGround", isGround);
+    }    
 }

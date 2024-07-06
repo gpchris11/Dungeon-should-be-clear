@@ -333,27 +333,6 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tileset_10
-      rect:
-        serializedVersion: 2
-        x: 192
-        y: 80
-        width: 80
-        height: 52
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9937f7bef0b1c884fb57fa3079b2c3c9
-      internalID: -1017144754
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: tileset_11
       rect:
         serializedVersion: 2
