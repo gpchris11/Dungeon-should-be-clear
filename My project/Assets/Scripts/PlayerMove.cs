@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Scripting.APIUpdating;
 using UnityEngine.UI;
-using System;
 using UnityEngine.Events;
 
 public class NewBehaviourScript : MonoBehaviour
@@ -14,7 +13,10 @@ public class NewBehaviourScript : MonoBehaviour
     Vector3 movedir;// 0 0 0
     Rigidbody2D rigid;//null
     Animator anim;
-    float vertivalVelocity = 0f;
+    [SerializeField] float vertivalVelocity = 0f;
+    bool isjump;
+
+    Camera cam;
 
     [Header("플레이어 IsGround")]
     [SerializeField] bool isGround;
@@ -30,14 +32,17 @@ public class NewBehaviourScript : MonoBehaviour
 
     void Start()
     {
-
+        cam = Camera.main;
     }
 
 
     void Update()
     {
+
         checkGround();
         MoveFunction();
+        watchDir();
+        jump();
 
         doAnim();
     }
@@ -48,7 +53,7 @@ public class NewBehaviourScript : MonoBehaviour
         {
             Vector2 curPos = transform.position;
             Debug.DrawLine(transform.position, curPos - new Vector2(0, GroundLengthCheck), GroundLengthColor);
-                                  //      시작         /                          끝                                  /       색         /
+            //시작,끝,색
         }
     }
 
@@ -74,15 +79,49 @@ public class NewBehaviourScript : MonoBehaviour
     private void MoveFunction()
     {
         movedir.x = Input.GetAxisRaw("Horizontal") * MoveSpeed;
-        rigid.velocity = movedir;
         movedir.y = rigid.velocity.y;
+        rigid.velocity = movedir;
         //좌우로 움직임 구현 A,D,방향키 누르면 1의 값을 넣음 아무것도 안누르면 0 컴퓨터한테 시키는 거임
         //물리에 의해 이동함
         //y 0, time.deltaTime;
+    }
+
+    private void watchDir()
+    {
+        Vector3 dir = transform.localScale;
+        if (movedir.x < 0 && dir.x != 1.0f)
+        {
+            dir.x = -3.6984f;
+            transform.localScale = dir;
+        }
+        if (movedir.x > 0 && dir.x != -1.0f)
+        {
+            dir.x = 3.6984f;
+            transform.localScale = dir;
+        }
     }
     private void doAnim()
     {
         anim.SetInteger("Horizontal", (int)movedir.x);
         anim.SetBool("IsGround", isGround);
-    }    
+    }
+    
+    private void jump()
+    {
+        
+        if (isGround == true && Input.GetKeyDown(KeyCode.Space))
+        {
+            rigid.AddForce(Vector2.up * JumpForce, ForceMode2D.Impulse);
+            Debug.Log("점프 실행");
+        }
+        //if (isGround == false)
+        //{
+        //    vertivalVelocity += Physics.gravity.y * Time.deltaTime;
+        //    Vector2 vecVel = rigid.velocity;
+        //    vecVel.y = vertivalVelocity;
+        //    rigid.velocity = vecVel;
+        //    //중력                    
+
+        //}
+    }
 }
