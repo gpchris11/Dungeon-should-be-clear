@@ -10,7 +10,7 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private float AttackTime = 0.4f;
     [SerializeField] private float AttackDmg = 1.0f;
     float AttackTimer = 0.0f;
-    bool Attacked = false;
+    [SerializeField] bool Attacked = false;
 
     private void Attack()
     {
@@ -25,7 +25,6 @@ public class PlayerAttack : MonoBehaviour
 
 
     }
-
     private void AtkTimer()
     {
         if(Attacked == true)//Attacked°¡ true¶ó¸é
@@ -39,8 +38,10 @@ public class PlayerAttack : MonoBehaviour
         if (AttackTimer > AttackTime)
         {
             Attacked = true;
+            AttackTimer = 0.0f;
         }
     }
+
     void Start()
     {
         anim = GetComponent<Animator>();
