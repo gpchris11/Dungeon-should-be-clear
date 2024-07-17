@@ -575,6 +575,7 @@ GameObject:
   - component: {fileID: 824386255}
   - component: {fileID: 824386253}
   - component: {fileID: 824386252}
+  - component: {fileID: 824386256}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -678,7 +679,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 824386248}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -700,10 +701,10 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.029168371, y: -0.06899691}
+  m_Offset: {x: 0.25746718, y: -0.023310494}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -714,7 +715,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.25866383, y: 0.460909}
+  m_Size: {x: 0.45434886, y: 0.10244622}
   m_EdgeRadius: 0
 --- !u!50 &824386253
 Rigidbody2D:
@@ -774,9 +775,44 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57984822a217124489784a641624539e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AttackTime: 1
+  AttackTime: 0.4
   AttackDmg: 1
   Attacked: 0
+--- !u!70 &824386256
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 824386248}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.0043483158, y: -0.047443494}
+  m_Size: {x: 0.3216263, y: 0.47430202}
+  m_Direction: 0
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -1867,11 +1903,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5302558189373267011, guid: 8980ca61ee9607b47a80f13af449754d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.13
+      value: 4.8624
       objectReference: {fileID: 0}
     - target: {fileID: 5302558189373267011, guid: 8980ca61ee9607b47a80f13af449754d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 0.7706
       objectReference: {fileID: 0}
     - target: {fileID: 5302558189373267011, guid: 8980ca61ee9607b47a80f13af449754d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1904,10 +1940,6 @@ PrefabInstance:
     - target: {fileID: 5302558189373267011, guid: 8980ca61ee9607b47a80f13af449754d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7057645364882494064, guid: 8980ca61ee9607b47a80f13af449754d, type: 3}
-      propertyPath: Movespeed
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
