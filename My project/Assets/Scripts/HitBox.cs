@@ -4,14 +4,21 @@ using UnityEngine;
 
 public class HitBox : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public enum enumHitType
+    {
+        None,
+        BodyCheck,
+        AttackCheck,
+        GroundCheck,
+    }
+    [SerializeField] protected enumHitType hitBoxType;
+
+    protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
         
     }
 
-    // Update is called once per frame
-    void Update()
+    protected virtual void OnTriggerExit2D(Collider2D collision)
     {
         
     }
