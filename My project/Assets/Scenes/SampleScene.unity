@@ -163,7 +163,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 317175446}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -660,10 +660,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 824386251}
+  - component: {fileID: 824386255}
+  - component: {fileID: 824386254}
   - component: {fileID: 824386250}
   - component: {fileID: 824386249}
-  - component: {fileID: 824386254}
-  - component: {fileID: 824386255}
   - component: {fileID: 824386253}
   - component: {fileID: 824386256}
   m_Layer: 0
@@ -804,11 +804,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MoveSpeed: 5
   JumpForce: 5
-  vertivalVelocity: 0
   isGround: 0
   ShowGroundLength: 1
   GroundLengthCheck: 1.43
   GroundLengthColor: {r: 1, g: 0, b: 0, a: 0}
+  vertivalVelocity: 0
 --- !u!114 &824386255
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -822,7 +822,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AttackTime: 0.4
-  AttackDmg: 1
+  AttackDmg: 3
   Attacked: 0
 --- !u!70 &824386256
 CapsuleCollider2D:
@@ -1942,10 +1942,6 @@ PrefabInstance:
     - target: {fileID: 5282861859022990267, guid: 8980ca61ee9607b47a80f13af449754d, type: 3}
       propertyPath: m_Name
       value: wizard
-      objectReference: {fileID: 0}
-    - target: {fileID: 5282861859022990267, guid: 8980ca61ee9607b47a80f13af449754d, type: 3}
-      propertyPath: m_TagString
-      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 5302558189373267011, guid: 8980ca61ee9607b47a80f13af449754d, type: 3}
       propertyPath: m_RootOrder
