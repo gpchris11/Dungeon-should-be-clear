@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 8340455438610244433}
   m_Layer: 0
   m_Name: wizard
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -50,7 +50,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db59e3eb37e470349bcebc2c306bde4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Movespeed: 2
   NextMove: 0
   isMove: 0
   MoveTimer: 0
@@ -58,6 +57,9 @@ MonoBehaviour:
   StopTime: 1
   repeatTime: 1.5
   touching: 0
+  Hp: 10
+  Dmg: 2
+  Movespeed: 2
 --- !u!212 &6183496043600542610
 SpriteRenderer:
   m_ObjectHideFlags: 0

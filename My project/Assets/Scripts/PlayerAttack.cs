@@ -7,11 +7,13 @@ public class PlayerAttack : MonoBehaviour
     Animator anim;
 
     [Header("공격 관련")]
-    [SerializeField] private float AttackTime = 0.4f;
-    [SerializeField] private float AttackDmg = 1.0f;
+    [SerializeField]  float AttackTime = 0.4f;
+    [SerializeField]  float AttackDmg = 1.0f;
     float AttackTimer = 0.0f;
     [SerializeField] bool Attacked = false;
     BoxCollider2D Hitbox;
+
+    Enemy enemy;
 
 
 
@@ -19,6 +21,7 @@ public class PlayerAttack : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         Hitbox = GetComponent<BoxCollider2D>();
+        enemy = GetComponent<Enemy>();
     }
 
     // Update is called once per frame
@@ -51,13 +54,25 @@ public class PlayerAttack : MonoBehaviour
         }
     }
 
-    //private void Hit()
+    public void TriggerEnter(Collider2D _coll, HitBox.enumHitType _hitType)
+    {
+        switch (_hitType)
+        {
+            case HitBox.enumHitType.AttackCheck:
+                if (_coll.CompareTag("Enemy"))
+                {
+                    Debug.Log("적에 닿았습니다");
+                    enemy.Hit(AttackDmg);
+                }
+                break;
+        }
+    }
+    //public void TriggerExit(Collider2D _coll, HitBox.enumHitType _hitType)
     //{
-    //    //Hitbox.enabled = false;
-
-    //    if (Attacked == true)
+    //    switch (_hitType)
     //    {
-    //        Hitbox.enabled = true;
+    //        case HitBox.enumHitType.BodyCheck:
+                
+    //            break;
     //    }
-    //}
-}
+    }

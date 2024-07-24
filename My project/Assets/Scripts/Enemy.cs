@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SocialPlatforms;
@@ -7,7 +8,6 @@ using UnityEngine.UIElements;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] float Movespeed;
     //float rightmax = 2f;
     //float leftmax = -2f;
     float currentPos;
@@ -25,6 +25,11 @@ public class Enemy : MonoBehaviour
 
     [SerializeField] bool touching;
     BoxCollider2D checkGroundColl;
+
+    [Header("적 프로퍼티")]
+    [SerializeField] float Hp;
+    [SerializeField] float Dmg;
+    [SerializeField] float Movespeed;
 
     private void Awake()
     {
@@ -134,6 +139,13 @@ public class Enemy : MonoBehaviour
                 break;
         }
     }
+
+    public void Hit(float _Dmg)
+    {
+        Hp -= _Dmg;
+    }
+
+
 }
 
 

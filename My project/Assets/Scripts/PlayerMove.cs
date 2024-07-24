@@ -5,24 +5,27 @@ using UnityEngine.Scripting.APIUpdating;
 using UnityEngine.UI;
 using UnityEngine.Events;
 
-public class NewBehaviourScript : MonoBehaviour
+public class PlayerMove : MonoBehaviour
 {
     [Header("플레이어 이동,점프")]
     [SerializeField] float MoveSpeed;
     [SerializeField] float JumpForce;
-    Vector3 movedir;// 0 0 0
-    Rigidbody2D rigid;//null
-    Animator anim;
-    [SerializeField] float vertivalVelocity = 0f;
-    bool isjump;
 
-    Camera cam;
 
     [Header("플레이어 IsGround")]
     [SerializeField] bool isGround;
     [SerializeField] bool ShowGroundLength;
     [SerializeField] float GroundLengthCheck;
     [SerializeField] Color GroundLengthColor;
+
+    Vector3 movedir;// 0 0 0
+    Rigidbody2D rigid;//null
+    Animator anim;
+    [SerializeField] float vertivalVelocity = 0f;
+
+    bool isjump;
+
+    Camera cam;
 
     private void Awake()
     {

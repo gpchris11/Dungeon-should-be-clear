@@ -2,17 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerHitbox : MonoBehaviour
+public class PlayerHitbox : HitBox
 {
-    // Start is called before the first frame update
-    void Start()
+    PlayerAttack player;
+
+    private void Start()
     {
-        
+        player = GetComponentInParent<PlayerAttack>();
     }
 
-    // Update is called once per frame
-    void Update()
+    protected override void OnTriggerEnter2D(Collider2D collision)
     {
-        
+        player.TriggerEnter(collision, hitBoxType);
     }
+    //protected override void OnTriggerExit2D(Collider2D collision)
+    //{
+    //    player.TriggerEnter(collision, hitBoxType);
+    //}
 }
