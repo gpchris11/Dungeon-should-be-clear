@@ -8,20 +8,19 @@ public class PlayerAttack : MonoBehaviour
 
     [Header("공격 관련")]
     [SerializeField]  float AttackTime = 0.4f;
-    [SerializeField]  float AttackDmg = 1.0f;
+    [SerializeField] float AttackDmg;
     float AttackTimer = 0.0f;
     [SerializeField] bool Attacked = false;
     BoxCollider2D Hitbox;
 
-    Enemy enemy;
+  
 
 
-
+    
     void Start()
     {
         anim = GetComponent<Animator>();
         Hitbox = GetComponent<BoxCollider2D>();
-        enemy = GetComponent<Enemy>();
     }
 
     // Update is called once per frame
@@ -38,6 +37,7 @@ public class PlayerAttack : MonoBehaviour
         {
             Attacked = true;//Attacked는 true
             anim.SetTrigger("Attacks");//Attacks 실행
+            
         }
     }
 
@@ -61,7 +61,8 @@ public class PlayerAttack : MonoBehaviour
             case HitBox.enumHitType.AttackCheck:
                 if (_coll.CompareTag("Enemy"))
                 {
-                    Debug.Log("적에 닿았습니다");
+                    Debug.Log((AttackDmg) + "의 데미지를 넣었습니다!");
+                    Enemy enemy = _coll.gameObject.GetComponent<Enemy>();
                     enemy.Hit(AttackDmg);
                 }
                 break;

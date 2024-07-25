@@ -5,8 +5,11 @@ using UnityEngine.Scripting.APIUpdating;
 using UnityEngine.UI;
 using UnityEngine.Events;
 
-public class PlayerMove : MonoBehaviour
+public class Player : MonoBehaviour
 {
+    [Header("플레이어 체력")]
+    [SerializeField] float Hp;
+
     [Header("플레이어 이동,점프")]
     [SerializeField] float MoveSpeed;
     [SerializeField] float JumpForce;
@@ -115,7 +118,7 @@ public class PlayerMove : MonoBehaviour
         if (isGround == true && Input.GetKeyDown(KeyCode.Space))
         {
             rigid.AddForce(Vector2.up * JumpForce, ForceMode2D.Impulse);
-            Debug.Log("점프 실행");
+            //Debug.Log("점프 실행");
         }
         //if (isGround == false)
         //{
@@ -127,4 +130,29 @@ public class PlayerMove : MonoBehaviour
 
         //}
     }
+
+    public void Hit(float _Dmg)
+    {
+        Hp -= _Dmg;
+
+        if (Hp <= 0)
+        {
+        
+        }
+        public void TriggerEnter(Collider2D _coll, HitBox.enumHitType _hitType)
+        { 
+            switch (_hitType)
+            {
+            case HitBox.enumHitType.BodyCheck:
+                if (_coll.CompareTag("Player"))
+                {
+                    Debug.Log((Dmg) + "의 데미지를 받았습니다!");
+                    Player player = _coll.gameObject.GetComponent<Player>();
+                    player.Hit(Dmg);
+
+                    break;
+                }
+            }
+    
+        }
 }

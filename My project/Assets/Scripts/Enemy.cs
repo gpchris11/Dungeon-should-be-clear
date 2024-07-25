@@ -13,7 +13,7 @@ public class Enemy : MonoBehaviour
     float currentPos;
     Vector3 movedir;
     Rigidbody2D rigid;
-    Animation anim;
+    Animator anim;
     EdgeCollider2D edge;
 
     public int NextMove;
@@ -22,6 +22,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] float MoveTime;
     [SerializeField] float StopTime;
     [SerializeField] float repeatTime;
+    protected bool isDead = false;
 
     [SerializeField] bool touching;
     BoxCollider2D checkGroundColl;
@@ -33,7 +34,7 @@ public class Enemy : MonoBehaviour
 
     private void Awake()
     {
-        anim = GetComponent<Animation>();
+        anim = GetComponent<Animator>();
         rigid = GetComponent<Rigidbody2D>();
         //checkGroundColl= GetComponentInChildren<BoxCollider2D>();
         //edge = GetComponent<EdgeCollider2D>();
@@ -112,6 +113,12 @@ public class Enemy : MonoBehaviour
         switch (_hitType)
         {
             case HitBox.enumHitType.BodyCheck:
+                if(_coll.CompareTag("Player"))
+                {
+                    Debug.Log((Dmg) + "의 데미지를 받았습니다!");
+                    Player player = _coll.gameObject.GetComponent<Player>();
+                    player.Hit(Dmg);
+                }
                 break;
             case HitBox.enumHitType.AttackCheck:
                 break;
@@ -139,10 +146,35 @@ public class Enemy : MonoBehaviour
                 break;
         }
     }
+    //public void TriggerEnter(Collider2D _coll, HitBox.enumHitType _hitType)
+    //{
+    //    switch (_hitType)
+    //    {
+    //        case HitBox.enumHitType.BodyCheck:
+    //            if (_coll.CompareTag("Enemy"))
+    //            {
+    //                Player.
+    //            }
+    //            break;
+    //    }
+    //}
 
     public void Hit(float _Dmg)
     {
         Hp -= _Dmg;
+        
+        if (Hp <= 0) 
+        {
+            anim.SetBool("IsDead", true);
+            isDead = true;
+            Invoke("DeadAnim", 0.3f); 
+        }
+
+    }
+
+    public void DeadAnim()
+    {
+        Destroy(gameObject);
     }
 
 
