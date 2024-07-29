@@ -10,6 +10,7 @@ public class HitBox : MonoBehaviour
         BodyCheck,
         AttackCheck,
         GroundCheck,
+        DistanceCheck,
     }
     [SerializeField] protected enumHitType hitBoxType;
 

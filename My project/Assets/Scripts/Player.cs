@@ -55,7 +55,7 @@ public class Player : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        if(ShowGroundLength == true)
+        if (ShowGroundLength == true)
         {
             Vector2 curPos = transform.position;
             Debug.DrawLine(transform.position, curPos - new Vector2(0, GroundLengthCheck), GroundLengthColor);
@@ -72,7 +72,7 @@ public class Player : MonoBehaviour
             return;
         }
 
-        RaycastHit2D hit = Physics2D.Raycast(transform.position,     Vector2.down,     GroundLengthCheck,            LayerMask.GetMask("Ground"));
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, GroundLengthCheck, LayerMask.GetMask("Ground"));
         //                                  플레이어 위치에서       Vector2(0, -1)로  GroundLengthCheck만큼보내서       Ground라는 레이어에 맞았는지
         //플레이어 위치에서 밑에 방향으로 GroundLengthCheck를 만큼 Raycast를 보내어 Ground라는 Layer에 Raycast가 맞았는지 확인
 
@@ -111,10 +111,10 @@ public class Player : MonoBehaviour
         anim.SetInteger("Horizontal", (int)movedir.x);
         anim.SetBool("IsGround", isGround);
     }
-    
+
     private void jump()
     {
-        
+
         if (isGround == true && Input.GetKeyDown(KeyCode.Space))
         {
             rigid.AddForce(Vector2.up * JumpForce, ForceMode2D.Impulse);
@@ -137,22 +137,24 @@ public class Player : MonoBehaviour
 
         if (Hp <= 0)
         {
-        
-        }
-        public void TriggerEnter(Collider2D _coll, HitBox.enumHitType _hitType)
-        { 
-            switch (_hitType)
-            {
-            case HitBox.enumHitType.BodyCheck:
-                if (_coll.CompareTag("Player"))
-                {
-                    Debug.Log((Dmg) + "의 데미지를 받았습니다!");
-                    Player player = _coll.gameObject.GetComponent<Player>();
-                    player.Hit(Dmg);
 
-                    break;
-                }
-            }
-    
         }
+    }
+    public void TriggerEnter(Collider2D _coll, HitBox.enumHitType _hitType)
+    {
+        switch (_hitType)
+        {
+            case HitBox.enumHitType.BodyCheck:
+                if (_coll.CompareTag("Enemy"))
+                {
+                    Debug.Log("데미지를 받았습니다!");
+                    Hit(1);
+                }
+                break;
+            
+        }
+        
+
+    }
 }
+

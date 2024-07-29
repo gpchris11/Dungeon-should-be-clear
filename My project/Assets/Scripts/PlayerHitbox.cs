@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerAttackHitbox : HitBox
+public class PlayerHitbox : HitBox
 {
-    PlayerAttack player;
+    Player player;
 
     private void Start()
     {
-        player = GetComponentInParent<PlayerAttack>();
+        player = GetComponentInParent<Player>();
     }
 
     protected override void OnTriggerEnter2D(Collider2D collision)

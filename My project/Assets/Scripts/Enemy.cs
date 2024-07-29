@@ -112,20 +112,25 @@ public class Enemy : MonoBehaviour
     {
         switch (_hitType)
         {
-            case HitBox.enumHitType.BodyCheck:
-                if(_coll.CompareTag("Player"))
-                {
-                    Debug.Log((Dmg) + "의 데미지를 받았습니다!");
-                    Player player = _coll.gameObject.GetComponent<Player>();
-                    player.Hit(Dmg);
-                }
-                break;
-            case HitBox.enumHitType.AttackCheck:
-                break;
-            case HitBox.enumHitType.GroundCheck:
+            //case HitBox.enumHitType.BodyCheck:
+            //    if(_coll.CompareTag("Player"))
+            //    {
+            //        Debug.Log((Dmg) + "의 데미지를 받았습니다!");
+            //        Player player = _coll.gameObject.GetComponent<Player>();
+            //        player.Hit(Dmg);
+            //    }
+            //    break;
+
+            case HitBox.enumHitType.GroundCheck: 
                 if (_coll.gameObject.layer == LayerMask.NameToLayer("Ground"))
                 {
                     touching = true;
+                }
+                break;
+            case HitBox.enumHitType.DistanceCheck:
+                if (_coll.CompareTag("Player"))
+                {
+                    Debug.Log("플레이어를 확인했습니다.");
                 }
                 break;
         }
@@ -144,6 +149,14 @@ public class Enemy : MonoBehaviour
                     transform.localScale = locS;
                 }
                 break;
+
+            case HitBox.enumHitType.DistanceCheck:
+                if (_coll.CompareTag("Player"))
+                {
+                    Debug.Log("플레이어가 시야에서 벗어났습니다.");
+                }
+                break;
+
         }
     }
     //public void TriggerEnter(Collider2D _coll, HitBox.enumHitType _hitType)
@@ -167,7 +180,8 @@ public class Enemy : MonoBehaviour
         {
             anim.SetBool("IsDead", true);
             isDead = true;
-            Invoke("DeadAnim", 0.3f); 
+            Invoke("DeadAnim", 0.3f);
+            Debug.Log("적을 처치하였습니다.");
         }
 
     }
