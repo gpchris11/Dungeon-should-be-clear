@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5044341615993867125}
   - component: {fileID: 1463682138361891393}
   m_Layer: 0
-  m_Name: wizard
+  m_Name: Fabwizard
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

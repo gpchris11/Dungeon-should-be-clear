@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Security.Cryptography.X509Certificates;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -8,13 +9,20 @@ using UnityEngine.UIElements;
 
 public class Enemy : MonoBehaviour
 {
+    [SerializeField] GameObject Wizfire;
+    public GameObject WizfirePrefab;
+    float AttackRate = 2f;
+    Transform target;
+    float AttackTimer;
+
+
     //float rightmax = 2f;
     //float leftmax = -2f;
     float currentPos;
     Vector3 movedir;
     Rigidbody2D rigid;
     Animator anim;
-    EdgeCollider2D edge;
+    
 
     public int NextMove;
     [SerializeField] bool isMove;
@@ -23,6 +31,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] float StopTime;
     [SerializeField] float repeatTime;
     protected bool isDead = false;
+    bool Attack = false;
 
     [SerializeField] bool touching;
     BoxCollider2D checkGroundColl;
@@ -46,6 +55,8 @@ public class Enemy : MonoBehaviour
         //NextMove = Random.Range(-1, 2);
         InvokeRepeating("choseMove", MoveTime, repeatTime);
         touching = true;
+        AttackTimer = 0f;
+
         
     }
 
@@ -54,6 +65,7 @@ public class Enemy : MonoBehaviour
     {
         Move();
 
+        
         //if (edge.IsTouchingLayers(LayerMask.GetMask("Ground")) == false)
         //{
         //    touching = false;
@@ -130,7 +142,9 @@ public class Enemy : MonoBehaviour
             case HitBox.enumHitType.DistanceCheck:
                 if (_coll.CompareTag("Player"))
                 {
-                    Debug.Log("플레이어를 확인했습니다.");
+                    SummoneFire();
+                    //Debug.Log("플레이어를 확인했습니다.");
+                    //Destroy(Move);
                 }
                 break;
         }
@@ -191,6 +205,21 @@ public class Enemy : MonoBehaviour
         Destroy(gameObject);
     }
 
+    private void SummoneFire()
+    {
+        AttackTimer += Time.deltaTime;
+
+        if (AttackTimer >= AttackRate)
+        {
+            AttackTimer = 0f;
+
+            GameObject Wizfire = Instantiate(WizfirePrefab, transform.position, transform.rotation);
+
+            Attack = true;
+            anim.SetBool("Attack", true);
+        }
+
+    }
 
 }
 
