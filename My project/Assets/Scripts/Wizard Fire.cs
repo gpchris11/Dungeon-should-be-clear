@@ -4,21 +4,22 @@ using UnityEngine;
 
 public class WizardFire : MonoBehaviour
 {
-    float moveSpeed = 1f;
+    float moveSpeed = 2f;
     Transform PlayerPos;
     Vector2 dir;
+    bool isShootEnemy = true;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Player")
         {
-            Destroy(gameObject);//총알 본인이 삭제
+            Destroy(gameObject);
             Player player = collision.GetComponent<Player>();
             player.Hit(1);
         }
         if (collision.tag == "Enemy")
         {
-            Destroy(gameObject);//총알 본인이 삭제
+            
             Enemy enemy = collision.GetComponent<Enemy>();
             enemy.Hit(0);
         }
@@ -36,5 +37,9 @@ public class WizardFire : MonoBehaviour
     {
         
 
+    }
+    public void shootEnemy()
+    {
+        isShootEnemy = false;
     }
 }

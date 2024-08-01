@@ -9,11 +9,13 @@ using UnityEngine.UIElements;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] GameObject Wizfire;
+    
     public GameObject WizfirePrefab;
     float AttackRate = 2f;
-    Transform target;
-    float AttackTimer;
+    
+    [SerializeField] Transform dynamicObject;
+    [SerializeField] float AttackTimer;
+    
 
 
     //float rightmax = 2f;
@@ -31,7 +33,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] float StopTime;
     [SerializeField] float repeatTime;
     protected bool isDead = false;
-    bool Attack = false;
+    [SerializeField] bool Attack = false;
 
     [SerializeField] bool touching;
     BoxCollider2D checkGroundColl;
@@ -143,7 +145,7 @@ public class Enemy : MonoBehaviour
                 if (_coll.CompareTag("Player"))
                 {
                     SummoneFire();
-                    //Debug.Log("플레이어를 확인했습니다.");
+                    Debug.Log("플레이어를 확인했습니다.");
                     //Destroy(Move);
                 }
                 break;
@@ -207,19 +209,27 @@ public class Enemy : MonoBehaviour
 
     private void SummoneFire()
     {
-        AttackTimer += Time.deltaTime;
+        Debug.Log("SummoneFire");
+        AttackTimer += Time.deltaTime;//0초부터 시간이 늘어남
 
         if (AttackTimer >= AttackRate)
+            //0~2               2 
         {
             AttackTimer = 0f;
-
-            GameObject Wizfire = Instantiate(WizfirePrefab, transform.position, transform.rotation);
-
+            Debug.Log("SummoneFire 작동");
+            GameObject go = Instantiate(WizfirePrefab, transform.position, transform.rotation);
+            WizardFire gosc = go.GetComponent<WizardFire>();
+            gosc.shootEnemy();
             Attack = true;
             anim.SetBool("Attack", true);
+
+        //    GameObject go = Instantiate(fabBullet, shootTrs.position, Quaternion.identity, dynamicObject);
+        //    Bullet goSc = go.GetComponent<Bullet>();
+        //    goSc.ShootPlayer();
         }
 
     }
+    
 
 }
 

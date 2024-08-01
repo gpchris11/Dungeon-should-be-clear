@@ -12,8 +12,9 @@ public class Player : MonoBehaviour
 
     [Header("플레이어 이동,점프")]
     [SerializeField] float MoveSpeed;
-    [SerializeField] float JumpForce;
-
+    [SerializeField] float JumpHight;
+    [SerializeField] float DoubleJumpHight;
+    [SerializeField] int jumpcount;
 
     [Header("플레이어 IsGround")]
     [SerializeField] bool isGround;
@@ -79,6 +80,7 @@ public class Player : MonoBehaviour
         if (hit)
         {
             isGround = true;
+            jumpcount = 0;
         }
     }
 
@@ -114,12 +116,39 @@ public class Player : MonoBehaviour
 
     private void jump()
     {
-
-        if (isGround == true && Input.GetKeyDown(KeyCode.Space))
+        //if (isGround || jumpcount < 2)
+        //{
+        //    rigid.velocity = Vector3.zero;
+        //    if (isGround == true && Input.GetKeyDown(KeyCode.Space))
+        //    {
+        //        rigid.AddForce(Vector2.up * JumpHight, ForceMode2D.Impulse);
+        //        jumpcount = 1;
+        //        //Debug.Log("점프 실행");
+        //    }
+        //    else
+        //    {
+        //        rigid.AddForce(Vector2.up * DoubleJumpHight, ForceMode2D.Impulse);
+        //        jumpcount = 2;  
+        //    }
+        //}
+        if (jumpcount < 2)
         {
-            rigid.AddForce(Vector2.up * JumpForce, ForceMode2D.Impulse);
-            //Debug.Log("점프 실행");
+            if (isGround == true && Input.GetKeyDown(KeyCode.Space))
+            {
+                rigid.AddForce(Vector2.up * JumpHight, ForceMode2D.Impulse);
+                //Debug.Log("점프 실행");
+                jumpcount = 1;
+            }
+
+            if (isGround == false && Input.GetKeyDown(KeyCode.Space))
+            {
+                rigid.AddForce(Vector2.up * JumpHight, ForceMode2D.Impulse);
+                //Debug.Log("점프 실행");
+                jumpcount = 2;
+            }
         }
+        
+
         //if (isGround == false)
         //{
         //    vertivalVelocity += Physics.gravity.y * Time.deltaTime;
