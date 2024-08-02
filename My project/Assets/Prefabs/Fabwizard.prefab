@@ -142,7 +142,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db59e3eb37e470349bcebc2c306bde4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WizfirePrefab: {fileID: 0}
+  WizfirePrefab: {fileID: 6435797166286679699, guid: dcd48310cd6c60441871655d60a67857, type: 3}
+  dynamicObject: {fileID: 0}
+  AttackTimer: 0
+  playerCheck: 0
   NextMove: 0
   isMove: 0
   MoveTimer: 0
@@ -194,7 +197,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 3
+  m_SortingOrder: 4
   m_Sprite: {fileID: 21300000, guid: 0c95faed3aa5a43d3b19f112f0843c87, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -410,17 +413,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: FabWizard fire
       objectReference: {fileID: 0}
+    - target: {fileID: 6435797166286679699, guid: dcd48310cd6c60441871655d60a67857, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8566244192095468230, guid: dcd48310cd6c60441871655d60a67857, type: 3}
       propertyPath: m_RootOrder
       value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 8566244192095468230, guid: dcd48310cd6c60441871655d60a67857, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.21499997
+      value: 0.224
       objectReference: {fileID: 0}
     - target: {fileID: 8566244192095468230, guid: dcd48310cd6c60441871655d60a67857, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.1577778
+      value: 0.085
       objectReference: {fileID: 0}
     - target: {fileID: 8566244192095468230, guid: dcd48310cd6c60441871655d60a67857, type: 3}
       propertyPath: m_LocalPosition.z

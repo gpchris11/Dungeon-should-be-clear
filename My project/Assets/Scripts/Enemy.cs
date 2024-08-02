@@ -15,6 +15,7 @@ public class Enemy : MonoBehaviour
     
     [SerializeField] Transform dynamicObject;
     [SerializeField] float AttackTimer;
+    [SerializeField] bool playerCheck;
     
 
 
@@ -67,7 +68,10 @@ public class Enemy : MonoBehaviour
     {
         Move();
 
-        
+        if (playerCheck == true)
+        {
+            SummoneFire();
+        }
         //if (edge.IsTouchingLayers(LayerMask.GetMask("Ground")) == false)
         //{
         //    touching = false;
@@ -144,7 +148,7 @@ public class Enemy : MonoBehaviour
             case HitBox.enumHitType.DistanceCheck:
                 if (_coll.CompareTag("Player"))
                 {
-                    SummoneFire();
+                    playerCheck = true;
                     Debug.Log("플레이어를 확인했습니다.");
                     //Destroy(Move);
                 }
@@ -169,6 +173,7 @@ public class Enemy : MonoBehaviour
             case HitBox.enumHitType.DistanceCheck:
                 if (_coll.CompareTag("Player"))
                 {
+                    playerCheck = false;
                     Debug.Log("플레이어가 시야에서 벗어났습니다.");
                 }
                 break;
@@ -196,7 +201,7 @@ public class Enemy : MonoBehaviour
         {
             anim.SetBool("IsDead", true);
             isDead = true;
-            Invoke("DeadAnim", 0.3f);
+            Invoke("DeadAnim", 0.5f);
             Debug.Log("적을 처치하였습니다.");
         }
 

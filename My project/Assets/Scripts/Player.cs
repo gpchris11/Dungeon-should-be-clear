@@ -142,7 +142,7 @@ public class Player : MonoBehaviour
 
             if (isGround == false && Input.GetKeyDown(KeyCode.Space))
             {
-                rigid.AddForce(Vector2.up * JumpHight, ForceMode2D.Impulse);
+                rigid.AddForce(Vector2.up * DoubleJumpHight, ForceMode2D.Impulse);
                 //Debug.Log("점프 실행");
                 jumpcount = 2;
             }

@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class WizardFire : MonoBehaviour
 {
-    float moveSpeed = 2f;
+    [SerializeField] float moveSpeed = 2f;
     Transform PlayerPos;
     Vector2 dir;
     bool isShootEnemy = true;
+    Rigidbody2D fire;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -29,7 +30,9 @@ public class WizardFire : MonoBehaviour
     {
         PlayerPos = GameObject.Find("Player").GetComponent<Transform>();
         dir = PlayerPos.position - transform.position;
-        GetComponent<Rigidbody2D>().AddForce(dir.normalized * moveSpeed * Time.deltaTime);
+        fire.AddForce(dir.normalized * moveSpeed, ForceMode2D.Impulse);
+
+        
     }
 
     // Update is called once per frame
